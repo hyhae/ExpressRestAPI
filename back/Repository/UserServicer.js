@@ -1,9 +1,9 @@
 const sqlConnection = require("./ConnectionHandler")
 
 
-function getCredentials (username){
+function getUser(username , password){
     return new Promise((resolve,reject) => {
-        sqlConnection.query("SELECT password from users where username = ?", username, (err,results) =>{
+        sqlConnection.query("SELECT * from users where username = ? AND password = ?", [username, password], (err,results) =>{
             if(err){
                 return reject(err);
             }
@@ -13,5 +13,5 @@ function getCredentials (username){
 }
 
 module.exports = {
-getCredentials
+    getUser
 }
