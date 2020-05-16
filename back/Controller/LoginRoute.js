@@ -5,14 +5,11 @@ const loginServices = require("../Services/LoginServices")
 
 
 router.post("", (req, res) => {
-    var handleRequest = util.promisify(loginServices.authenticateUser)
-    handleRequest(req.body.username,req.body.password)
-    .then(result => {
-        console.log(resolve(result))
-    });
-    //authenticated =  loginServices.authenticateUser(req.body.username, req.body.password);
-    //res.status(201).json(authenticated);
-    //res.send(authenticated)
+    loginServices.authenticateUser(req.body.username, req.body.password)
+    .then((result) => {
+        console.log(result)
+        res.status(201).json(result);
+    })
 })
 
 module.exports = router;

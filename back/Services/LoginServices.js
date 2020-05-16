@@ -1,14 +1,8 @@
 var loginServicer = require("../Repository/LoginServicer");
 
 module.exports = {
-
-    authenticateUser: function (usernameParam, passwordParam) {
-
-        loginServicer.getCredentials(usernameParam)
-        .then( data => {
-            console.log(data)
-            return passwordParam === data;
-        })
+    authenticateUser: async (usernameParam, passwordParam) => {
+        result = await loginServicer.getCredentials(usernameParam) ;
+        return result[0].password === passwordParam
     }
-
 }
