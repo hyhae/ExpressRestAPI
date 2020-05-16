@@ -35,7 +35,7 @@ router.put("/update", authentication.authenticateAdmin , (req,res)=>{
         res.end()
     })
     .catch((err)=>{
-        res.status(401).json({err: "Error occured. Reason: Book not found. ? ", err})
+        res.status(401).json({err: "Error occured. Reason: Book not found."})
         res.end()
     })
 })
