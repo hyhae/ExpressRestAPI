@@ -1,4 +1,4 @@
-const sqlConnection = require("./ConnectionHandler")
+const sqlConnection = require("../Utils/ConnectionHandler")
 
 
 function insertBook(bookName , bookAuthor, bookDescription, publishingDate, numberOfCopies, shelfLocation){

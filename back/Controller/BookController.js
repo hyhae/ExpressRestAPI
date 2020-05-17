@@ -1,11 +1,11 @@
 const express = require("express")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
-const bookServices = require("../Services/BooksServices")
+const bookService = require("../Services/BookService")
 const authentication = require("../Services/AuthenticationService")
 
 router.get("/search", authentication.authenticateToken, (req, res) => {
-    bookServices.searchBook(req.body.book, req.body.author)
+    bookService.searchBook(req.body.book, req.body.author)
     .then((result) => {
         res.status(201).json(result)
         res.end()
@@ -17,7 +17,7 @@ router.get("/search", authentication.authenticateToken, (req, res) => {
 })
 
 router.post("/insert", authentication.authenticateAdmin , (req,res)=>{
-    bookServices.insertBook(req.body.book, req.body.author, req.body.description, req.body.publishing_date, req.body.number_of_copies, req.body.shelf_location)
+    bookService.insertBook(req.body.book, req.body.author, req.body.description, req.body.publishing_date, req.body.number_of_copies, req.body.shelf_location)
     .then((result) => {
         res.status(201).json({message:"Book Inserted successfully!"})
         res.end()
@@ -29,7 +29,7 @@ router.post("/insert", authentication.authenticateAdmin , (req,res)=>{
 })
 
 router.put("/update", authentication.authenticateAdmin , (req,res)=>{
-    bookServices.updateBookCopies(req.body.book, req.body.author, req.body.number_of_copies)
+    bookService.updateBookCopies(req.body.book, req.body.author, req.body.number_of_copies)
     .then((result) => {
         res.status(201).json({message:"Book updated successfully!"})
         res.end()
