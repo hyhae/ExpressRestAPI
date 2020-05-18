@@ -8,8 +8,8 @@ const authService = require("../Services/AuthenticationService")
 router.post("", (req, res) => {
     userService.authenticateAndReturnUser(req.body.username, req.body.password)
         .then((result) => {
-            var accessToken = jwt.sign({UID:result[0].UID, username:result[0].username, role:result[0].role}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '15s'})
-            var refreshToken = jwt.sign({UID:result[0].UID, username:result[0].username, role:result[0].role}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: '30s'})
+            var accessToken = jwt.sign({UID:result[0].UID, username:result[0].username, role:result[0].role}, process.env.ACCESS_TOKEN_SECRET, {expiresIn: process.env.ACCESS_TOKEN_EXPIRY})
+            var refreshToken = jwt.sign({UID:result[0].UID, username:result[0].username, role:result[0].role}, process.env.REFRESH_TOKEN_SECRET, {expiresIn: process.env.REFRESH_TOKEN_EXPIRY})
             
             authService.updateRefreshToken(result[0].UID, refreshToken)
             .catch((err)=>{
